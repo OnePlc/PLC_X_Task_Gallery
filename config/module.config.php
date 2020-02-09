@@ -20,25 +20,7 @@ use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-    # Gallery Module - Routes
-    'router' => [
-        'routes' => [
-            'task-gallery' => [
-                'type'    => Segment::class,
-                'options' => [
-                    'route' => '/task/gallery[/:action[/:id]]',
-                    'constraints' => [
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ],
-                    'defaults' => [
-                        'controller' => Controller\GalleryController::class,
-                        'action'     => 'index',
-                    ],
-                ],
-            ],
-        ],
-    ], # Routes
+
 
     # View Settings
     'view_manager' => [

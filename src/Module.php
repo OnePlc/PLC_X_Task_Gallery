@@ -22,8 +22,8 @@ use Laminas\Db\TableGateway\TableGateway;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\EventManager\EventInterface as Event;
 use Laminas\ModuleManager\ModuleManager;
+use OnePlace\Task\Model\TaskTable;
 use OnePlace\Task\Gallery\Controller\GalleryController;
-use OnePlace\Task\Gallery\Model\GalleryTable;
 
 class Module {
     /**
@@ -49,9 +49,9 @@ class Module {
         $application = $e->getApplication();
         $container    = $application->getServiceManager();
         $oDbAdapter = $container->get(AdapterInterface::class);
-        $tableGateway = $container->get(GalleryTable::class);
-        CoreEntityController::addHook('taskgallery-view-before',(object)['sFunction'=>'attachGallery','oItem'=>new GalleryController($oDbAdapter,$tableGateway,$container)]);
+        $tableGateway = $container->get(TaskTable::class);
 
         # Register Filter Plugin Hook
     }
+
 }
