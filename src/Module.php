@@ -2,7 +2,7 @@
 /**
  * Module.php - Module Class
  *
- * Module Class File for Gallery Gallery Plugin
+ * Module Class File for Task Gallery Plugin
  *
  * @category Config
  * @package Task\Gallery
@@ -31,7 +31,7 @@ class Module {
      *
      * @since 1.0.0
      */
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
 
     /**
      * Load module config file
@@ -49,9 +49,31 @@ class Module {
         $application = $e->getApplication();
         $container    = $application->getServiceManager();
         $oDbAdapter = $container->get(AdapterInterface::class);
-        $tableGateway = $container->get(TaskTable::class);
+        $tableGateway = $container->get(GalleryTable::class);
 
         # Register Filter Plugin Hook
     }
 
+    /**
+     * Load Models
+     */
+
+    /**
+     * Load Controllers
+     */
+    public function getControllerConfig() : array {
+        return [
+            'factories' => [
+                # Installer
+                Controller\InstallController::class => function($container) {
+                    $oDbAdapter = $container->get(AdapterInterface::class);
+                    return new Controller\InstallController(
+                        $oDbAdapter,
+                        $container->get(Model\GalleryTable::class),
+                        $container
+                    );
+                },
+            ],
+        ];
+    } # getControllerConfig()
 }

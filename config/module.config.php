@@ -2,7 +2,7 @@
 /**
  * module.config.php - Gallery Config
  *
- * Main Config File for Gallery Gallery Plugin
+ * Main Config File for Task Gallery Plugin
  *
  * @category Config
  * @package Task\Gallery
@@ -20,7 +20,21 @@ use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-
+    # Gallery Module - Routes
+    'router' => [
+        'routes' => [
+            'task-gallery-setup' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/task/gallery/setup',
+                    'defaults' => [
+                        'controller' => Controller\InstallController::class,
+                        'action'     => 'checkdb',
+                    ],
+                ],
+            ],
+        ],
+    ], # Routes
 
     # View Settings
     'view_manager' => [
