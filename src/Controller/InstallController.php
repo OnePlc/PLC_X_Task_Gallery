@@ -19,7 +19,7 @@ namespace OnePlace\Task\Gallery\Controller;
 
 use Application\Controller\CoreUpdateController;
 use Application\Model\CoreEntityModel;
-use OnePlace\Task\Gallery\Model\GalleryTable;
+use OnePlace\Task\Model\TaskTable;
 use Laminas\View\Model\ViewModel;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\TableGateway\TableGateway;
@@ -30,10 +30,10 @@ class InstallController extends CoreUpdateController {
      * InstallController constructor.
      *
      * @param AdapterInterface $oDbAdapter
-     * @param GalleryTable $oTableGateway
+     * @param TaskTable $oTableGateway
      * @since 1.0.0
      */
-    public function __construct(AdapterInterface $oDbAdapter, GalleryTable $oTableGateway, $oServiceManager)
+    public function __construct(AdapterInterface $oDbAdapter, TaskTable $oTableGateway, $oServiceManager)
     {
         $this->oTableGateway = $oTableGateway;
         $this->sSingleForm = 'taskgallery-single';
@@ -57,14 +57,6 @@ class InstallController extends CoreUpdateController {
         if(! $oRequest->isPost()) {
 
             $bTableExists = false;
-
-            try {
-                $this->oTableGateway->fetchAll(false);
-                $bTableExists = true;
-            } catch (\RuntimeException $e) {
-
-            }
-
             return new ViewModel([
                 'bTableExists' => $bTableExists,
                 'sVendor' => 'oneplace',

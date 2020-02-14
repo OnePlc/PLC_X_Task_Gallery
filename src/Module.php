@@ -49,7 +49,7 @@ class Module {
         $application = $e->getApplication();
         $container    = $application->getServiceManager();
         $oDbAdapter = $container->get(AdapterInterface::class);
-        $tableGateway = $container->get(GalleryTable::class);
+        $tableGateway = $container->get(TaskTable::class);
 
         # Register Filter Plugin Hook
     }
@@ -69,7 +69,7 @@ class Module {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     return new Controller\InstallController(
                         $oDbAdapter,
-                        $container->get(Model\GalleryTable::class),
+                        $container->get(TaskTable::class),
                         $container
                     );
                 },
